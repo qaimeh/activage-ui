@@ -3,7 +3,7 @@
 that have an id of `modal-component` */
 /* https://stackoverflow.com/a/48689004/9263761 */
 mat-dialog-container#modal-component {
-  border: 3px solid #262626;
+  border: 3px solid #7e7979;
   border-radius: 11px;
-  background-color: #1a1a1a;
+  background-color: #d8d2d2;
 }

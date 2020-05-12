@@ -14,7 +14,7 @@ export class AppComponent {
 
   }
   ngAfterViewInit(){
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#4e4e4e';
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#d8d2d2';
  }
 
  openModal() {
