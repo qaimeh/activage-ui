@@ -32,7 +32,6 @@ export class ModalComponent implements OnInit {
         this.authService.login(val.username, val.password)
             .subscribe(
                 () => {
-                    console.log("User is logged in");
                     this.router.navigateByUrl('/');
                 }
             );
