@@ -1,2 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
-@import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+.footer{
+  margin-top: 40%;
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding-top: 20px;
+
+  text-align: center;
+  position: absolute;
+}
+#logout-button {
+  color: white;
+  background-color: #4b4b4b;
+  border: 1px solid black;
+}
+
+

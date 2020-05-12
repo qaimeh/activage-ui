@@ -1,11 +1,9 @@
-.footer{
-    margin-top: 40%;
-    background-color: black;
-    color: white;
-    width: 100%;
-    padding-top: 20px;
-  
-   
-    text-align: center;
-    position: absolute;
-  }
+
+/* Overwrite the styles of the mat-dialog-container element globally, but only for those
+that have an id of `modal-component` */
+/* https://stackoverflow.com/a/48689004/9263761 */
+mat-dialog-container#modal-component {
+  border: 3px solid #262626;
+  border-radius: 11px;
+  background-color: #1a1a1a;
+}

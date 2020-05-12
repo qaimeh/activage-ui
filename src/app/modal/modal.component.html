@@ -1,0 +1,30 @@
+<div id="modal-content-wrapper">
+  <header id="modal-header">
+      <h1 id="modal-title">Enter username and password for keyclaock</h1>
+  </header>
+  <section id="modal-body">
+      <p>On succefull sign in authenticatino token will be received</p>
+  </section>
+
+  <form [formGroup]="form">
+    <fieldset>
+        <legend>Login</legend>
+        <div class="form-field">
+            <label>UserName:</label>
+            <input class="form-control" name="username" formControlName="username">
+        </div>
+        <div class="form-field">
+            <label>Password:</label>
+            <input class="form-control" name="password" formControlName="password"
+                   type="password">
+        </div>
+    </fieldset>
+   <footer id="modal-footer">
+      <button mat-raised-button id="modal-action-button" (click)="login()">Submit</button>
+      <!--<button mat-raised-button id="modal-cancel-button" (click)="closeModal()">Go back</button>-->
+  </footer>
+</form>
+
+</div>
+
+
