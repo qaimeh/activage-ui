@@ -2,7 +2,9 @@ import { AuthServiceService } from './../auth-service.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-modal',
@@ -12,47 +14,62 @@ import { Router } from '@angular/router';
 export class ModalComponent implements OnInit {
 
   form: FormGroup;
+  loading = false;
+    submitted = false;
+    returnUrl: string;
+    error: HttpErrorResponse;
 
   constructor(
-    public dialogRef: MatDialogRef<ModalComponent>,
+   // public dialogRef: MatDialogRef<ModalComponent>,
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthServiceService) {
       this.form = this.fb.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
       });
+
     }
+
+        // convenience getter for easy access to form fields
+        get f() { return this.form.controls; }
 
   login() {
     const val = this.form.value;
-    console.log('inside log function:');
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+  }
+
+    this.loading = true;
 
     if (val.username && val.password) {
         this.authService.login(val.username, val.password)
-            .subscribe(
-                () => {
-                    this.router.navigateByUrl('/');
-                }
-            );
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.router.navigate([this.returnUrl]);
+            },
+            error => {
+
+                this.error = error;
+                this.loading = false;
+            });
     }
 }
 
 
 ngOnInit() {
+
+
+  this.returnUrl = this.route.snapshot.queryParams[this.returnUrl] || 'clientlogin';
 }
 
 // When the user clicks the action button a.k.a. the logout button in the\
 // modal, show an alert and followed by the closing of the modal
-actionFunction() {
-  alert("You have logged out.");
-  this.closeModal();
-}
 
-// If the user clicks the cancel button a.k.a. the go back button, then\
-// just close the modal
-closeModal() {
-  this.dialogRef.close();
-}
 
 }

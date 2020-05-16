@@ -1,3 +1,6 @@
+import { UserService } from './shared/user.service';
+import { AppSettingsServiceService } from './shared/app-settings-service.service';
+import { AuthServiceService } from './auth-service.service';
 import { ModalComponent } from './modal/modal.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,9 +13,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ValuesComponent } from './values/values.component';
-import { InsideappComponent } from './insideapp/insideapp.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ClientLoginComponent } from './client-login/client-login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SideBarComponent,
     ModalComponent,
     ValuesComponent,
-    InsideappComponent
+    ClientLoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthServiceService, AppSettingsServiceService, UserService],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]
 })

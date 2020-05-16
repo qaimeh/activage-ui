@@ -1,6 +1,10 @@
+import { AuthServiceService } from './auth-service.service';
+
 import { Component, ElementRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
+import { User } from './shared/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,23 +13,25 @@ import { ModalComponent } from './modal/modal.component';
 })
 export class AppComponent {
   title = 'activage';
+  currentUser: User;
 
-  constructor(private elementRef: ElementRef, public matDialog: MatDialog){
+  constructor(
+    private elementRef: ElementRef,
+    public matDialog: MatDialog,
+    private authticationService: AuthServiceService,
+    private router: Router){
 
+      authticationService.curentUser.subscribe(x => this.currentUser = x);
   }
+
   ngAfterViewInit(){
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#d8d2d2';
  }
 
- openModal() {
-  const dialogConfig = new MatDialogConfig();
-  // The user can't close the dialog by clicking outside its body
-  dialogConfig.disableClose = true;
-  dialogConfig.id = 'modal-component';
-  dialogConfig.height = '350px';
-  dialogConfig.width = '600px';
-  // https://material.angular.io/components/dialog/overview
-  const modalDialog = this.matDialog.open(ModalComponent, dialogConfig);
+
+logout(){
+  this.authticationService.logout();
+  this.router.navigate(['/login']);
 }
 
 

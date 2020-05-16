@@ -1,10 +1,36 @@
 
-<app-side-bar></app-side-bar>
-<div class="container">
-  <div class="row">
-    <div class="col text-center">
-      <button class="btn btn-info" mat-raised-button id="logout-button" (click)="openModal()">Authenticate first please</button>
-    </div>
+
+ <!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <!-- Brand -->
+    <a href="https://khired.com/">
+      <img src="./assets/img/activage.png" width="200px" height="100px">
+    </a>
+
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/">Home</a>
+      <a class="nav-item nav-link" (click)="logout()">Logout</a>
   </div>
+</nav>
+
+<!-- main app container -->
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
+
+
+<!-- credits -->
+<div class="text-center mt-4">
+  <p>
+      <a href="https://www.activageproject.eu/" target="_top">Pilot demo@Activage  </a>
+  </p>
+  <p>
+      <a href="https://dsi.nuigalway.ie/units/uiot" target="_top">UIoT@DSI Institue </a>
+  </p>
+</div>
+
+
+<footer class="footer">
+  <p>activage@2020</p>
+
+</footer>
