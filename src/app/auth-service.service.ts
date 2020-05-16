@@ -67,9 +67,8 @@ retrieveMsgs(clientId: string) {
   'Authorization': `Bearer ${localStorage.getItem('access_token')}`
   });
 
-  return this.http.post<any>(`${this.configSetting.aiotesUrl}${this.configSetting.observations}${clientId}`, {headers}).pipe(
+  return this.http.post<any>(`${this.configSetting.aiotesUrl}${this.configSetting.observations}`, {}, {headers}).pipe(
     map(obs => {
-      console.log(JSON.stringify(obs));
       return obs;
   }), catchError((error: HttpErrorResponse) => {
     console.log('Handling error locally and rethrowing it...', error);
@@ -95,7 +94,6 @@ getClient(clientId: string){
 
   return this.http.get<any>(`${this.configSetting.aiotesUrl}${this.configSetting.client}${clientId}`, {headers}).pipe(
     map(user => {
-    console.log(JSON.stringify(user));
     return user;
   }), catchError((error: HttpErrorResponse) => {
     console.log('Handling error locally and rethrowing it...', error);

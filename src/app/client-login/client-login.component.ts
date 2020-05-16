@@ -44,7 +44,8 @@ export class ClientLoginComponent implements OnInit {
              .pipe(first())
              .subscribe(
                  data => {
-                     this.router.navigate([this.returnUrl]);
+                  this.parseClientJson(data);
+                  this.router.navigate([this.returnUrl]);
                  },
                  error => {
                      this.error = error;
@@ -57,4 +58,11 @@ export class ClientLoginComponent implements OnInit {
       this.registerBtn = false;
       this.returnUrl = this.route.snapshot.queryParams[this.returnUrl] || 'values';
      }
+
+     parseClientJson(json: JSON){
+        let client : any = JSON.parse(JSON.stringify(json));
+        localStorage.setItem('clientId', client.clientId);
+
+     }
+
 }
