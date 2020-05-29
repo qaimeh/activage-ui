@@ -1,2 +1,89 @@
-<p>register works!</p>
-<h1>PAKISTAN</h1>
+<button class="accordion">Register a client</button>
+<div class="panel">
+  <div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="clientform" (ngSubmit)="registerClient()">
+                <div class="form-group">
+                    <label for="client">Client details</label>
+                   <!-- <input type="text" formControlName="client" class="form-control" [ngClass]="{ 'is-invalid': submitted && f1.client.errors }" />-->
+                    <textarea  ng-init='foo="Some default value"'  formControlName="client" class="form-control"> </textarea>
+                    <div *ngIf="submitted && f1.client.errors" class="invalid-feedback">
+                        <div *ngIf="f1.client.errors.required">client is required</div>
+                    </div>
+                </div>
+                <button [disabled]="loadingClient" class="btn btn-primary">
+                    <span *ngIf="loadingClient" class="spinner-border spinner-border-sm mr-1"></span>
+                    Register a client
+                </button>
+
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error.error}}</div>
+
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+<button class="accordion">Register a platform</button>
+<div class="panel">
+  <div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="platformForm" (ngSubmit)="registerToPlatform()">
+                <div class="form-group">
+                    <label for="platform">Platform details</label>
+
+                     <textarea ng-init='foo="Some default value"'  formControlName="platform" class="form-control"> {{foo}}</textarea>
+
+                    <div *ngIf="submitted && f2.platform.errors" class="invalid-feedback">
+                        <div *ngIf="f2.platform.errors.required">platform description is required</div>
+                    </div>
+                </div>
+                <button [disabled]="loadingPlatform" class="btn btn-primary">
+                    <span *ngIf="loadingPlatform" class="spinner-border spinner-border-sm mr-1"></span>
+                    Register a platform
+                </button>
+
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error.error}}</div>
+
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+<button class="accordion">Subscribe to device</button>
+<div class="panel" >
+  <div class="col-md-6 offset-md-3 mt-5">
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="subscribeform" (ngSubmit)="subscribeToDevice()">
+                <div class="form-group">
+                    <label for="platform"> Device ID's</label>
+
+                     <textarea  ng-init='foo="Some default value"'  formControlName="subscribe" class="form-control"> {{foo}}</textarea>
+
+                    <div *ngIf="submitted && f3.subscribe.errors" class="invalid-feedback">
+                        <div *ngIf="f3.subscribe.errors.required">platform description is required</div>
+                    </div>
+                </div>
+                <button [disabled]="loadingSubscription" class="btn btn-primary">
+                    <span *ngIf="loadingSubscription" class="spinner-border spinner-border-sm mr-1"></span>
+                    subcribe to a device please!
+                </button>
+
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error.error}}</div>
+
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+
+
+

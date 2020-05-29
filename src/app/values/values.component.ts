@@ -1,8 +1,12 @@
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { QuerymodelService } from './../semantic-web/querymodel.service';
 import { AuthServiceService } from './../auth-service.service';
 import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { first, catchError } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { isDefined } from '@angular/compiler/src/util';
+import { throwError } from 'rxjs';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-values',
@@ -20,9 +24,15 @@ export class ValuesComponent implements OnInit {
   result: any;
   unit: any;
   observationTime: any;
+  chart: Chart;
+  private myData: MyData [] = [];
 
 
-  constructor(private authService: AuthServiceService, private route: ActivatedRoute) { }
+
+  constructor(private http: HttpClient,
+    private authService: AuthServiceService,
+    private route: ActivatedRoute,
+    private qryModel: QuerymodelService) { }
 
   ngOnInit(): void {
 
@@ -33,6 +43,82 @@ export class ValuesComponent implements OnInit {
 
   }
 
+
+  getReport(e){
+
+    let num =e.target.value
+    this.querySparqlEndpoint(num);
+
+
+
+
+
+
+  }
+
+  querySparqlEndpoint(num: number) {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json, */*'
+    });
+
+    const params = new HttpParams()
+    .set('query',' SELECT ?results  FROM <http://activage.uix.dumy.data> WHERE {  <http://openiot.eu/resource/client/c10> <http://www.w3.org/ns/sosa/subscribedTo> ?o. ?o <http://www.w3.org/ns/sosa/hasSimpleResult> ?results. }   limit '+num)
+    // .set('query', 'INSERT DATA { GRAPH <urn:sparql:tests:insert:data>  { <http://aa> <http://bb> \'dd\' .  } }')
+    .set ('format', 'json');
+
+    const opt= {
+      params : params,
+      headers : headers
+
+    }
+
+
+    this.http.get('http://activage.datascienceinstitute.ie:8890/sparql', opt).subscribe((data: Response) => {
+    console.log(data);
+    let prsRslt= JSON.parse(JSON.stringify(data));
+    let results= prsRslt.results.bindings;
+    let i = 0;
+    this.myData.length=0;// = [];
+    for(let result in results ){
+      let values= results[result];
+        for(let val in values){
+            i=i+=1;
+              const data =new MyData(i,values[val].value);
+              this.myData.push(data);
+
+
+        }
+    }
+
+     // console.log('jsojn string '+JSON.stringify(this.myData))
+
+     /** create a chart for the retreived values from sparql endpoint */
+    this.chart = new Chart('canvas', {
+      type: 'bar',
+      data: {
+        labels: this.myData.map(x => x.id),
+        datasets: [
+          {
+            label: 'value',
+            data: this.myData.map(x => x.value),
+            backgroundColor: 'rgba(255, 205, 86, 9)',borderColor: 'rgba(255, 205, 86, 9)'
+          }
+        ]
+      },
+    });
+
+
+    }), catchError((error: HttpErrorResponse) => {
+      console.log('Handling error locally and rethrowing it...', error);
+      console.log('error is:' + throwError(error));
+      return throwError(error);
+    });
+
+    }
+
+
   getObservations(){
 
     this.authService.retrieveMsgs(localStorage.getItem('clientId'))
@@ -40,6 +126,11 @@ export class ValuesComponent implements OnInit {
     .subscribe(
         data => {
         let parsed= JSON.parse(JSON.stringify(data));
+
+        // ----------------------------------//
+        // here, a call to functio that rdfize it again, with some other paramters, and dumpm into virtuoso
+          this.qryModel.createModel(parsed)
+        // -----------------------------------//
 
         let metaData= parsed[0]['@graph'][0]['@graph'];
 
@@ -104,4 +195,22 @@ export class ValuesComponent implements OnInit {
     clearInterval(this.timer);
 
   }
+
+}
+
+  var dringlichkeiten  = [{
+    "id": 1,
+    "value": 883
+}];
+
+
+export class MyData {
+  public id: number;
+  public value: number;
+
+  constructor(id: number, value: number){
+    this.id = id;
+    this.value = value;
+  }
+
 }

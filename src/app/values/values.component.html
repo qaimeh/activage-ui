@@ -1,5 +1,4 @@
 <p>values works!</p>
-<h1>PAKISTAN</h1>
 
 <div class="row">
   <div class="col-md-4">      <aside>
@@ -8,11 +7,16 @@
         <button type="button" class="btn btn-primary create-report">+ My Wellbeing Reports! </button>
 
         <ul class="list-sidebar bg-defoult">
-          <input type="radio" name="1" value="Reports"> Reports<br>
-          <input type="radio" name="1" value="Spam"> Spam<br>
-          <input type="radio" name="1" value="Trash"> Trash <br>
-          <input type="radio" name="1" value="other"> Other
+          <input type="radio" name="1" value="1" (click)="getReport($event)"> 1 Day<br>
+          <input type="radio" name="1" value="7" (click)="getReport($event)"> 7 Days<br>
+          <input type="radio" name="1" value="30" (click)="getReport($event)"> 30 Days <br>
+          <input type="radio" name="1" value="356" (click)="getReport($event)"> 365 Days
         </ul>
+
+        <div class="card-body p-1 m-0">
+					<canvas id="canvas"></canvas>
+        </div>
+
     </div>
  </aside>
 </div>

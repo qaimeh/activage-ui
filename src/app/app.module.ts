@@ -1,3 +1,4 @@
+import { QuerymodelService } from './semantic-web/querymodel.service';
 import { UserService } from './shared/user.service';
 import { AppSettingsServiceService } from './shared/app-settings-service.service';
 import { AuthServiceService } from './auth-service.service';
@@ -36,7 +37,7 @@ import { RegisterComponent } from './register/register.component';
     MatDialogModule,
     ReactiveFormsModule
   ],
-  providers: [AuthServiceService, AppSettingsServiceService, UserService],
+  providers: [AuthServiceService, AppSettingsServiceService, UserService, QuerymodelService],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]
 })
