@@ -12,32 +12,10 @@
       <a class="nav-item nav-link" (click)="logout()">Logout</a>
   </div>
 </nav>
-
-<h1> Activage UIX Manual: How to use this application </h1>
-<ul>
- <li><p> To use this application, firts step you need is to autheticate the application with Keyclaok by providing username and password. After successfull authentication
-   the application will be able to communicate with AIOTES for a certain time of period (i.e., token life-time) </p></li>
- <li><p> Next, you will be asked if client is registered with the AIOTES. If client is already registerd with the AIOTES, the user will be redirected
-   to the page where user can see the live observations from the deivces , the client has subscribed for.
- </p></li>
- <li><p> If client is not registered, you will be redirected to the page where followind steps has to be performed; (i) register the client, (ii) register a platform,
-    and (iii) subscribed to single or multuple devices. On successfull registeration, you will be redirected to the page where you can see
-    the real-time observations for the devices client has subscribed for.
- </p></li>
-
- <h2> My Wellbeing Profile:</h2>
- <ul>
-   <li><p> Here user can check the clients and devices s/he has registerd. User can check in see a
-     graphical representation of wellbeing profile for 1, 7, 30, and 365 days </p></li>
- </ul>
-</ul>
-
-<h2> Developer Guide</h2>
 <!-- main app container -->
 <div class="container">
   <router-outlet></router-outlet>
 </div>
-
 
 <!-- credits -->
 <div class="text-center mt-4">

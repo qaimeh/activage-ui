@@ -31,3 +31,17 @@
 .deg3, .deg6{margin: 0 1em 0 -1em}
 
 
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+table.c {
+  table-layout: auto;
+  width: 100%;
+}
+
+div.ex1 {
+  width: 500px;
+  margin: auto;
+  border: 3px solid #73AD21;
+}

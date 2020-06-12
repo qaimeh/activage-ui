@@ -1,41 +1,91 @@
-<p>values works!</p>
 
-<div class="row">
-  <div class="col-md-4">      <aside>
-    <div class="sidebar left ">
+<table class="c">
+  <tr>
+    <td>
+          <button type="button" class="btn btn-primary create-report">+ My Wellbeing Reports!</button>
 
-        <button type="button" class="btn btn-primary create-report">+ My Wellbeing Reports! </button>
+                <!--start of devive list from sparql-->
+      <div>
+        <p>This dropdown demonstrates the number of devices this client is subsribed for.</p>
+        <button type="button" class="btn btn-primary create-report">Report for client:  {{wellComeClientMsg}}</button>
+      <div>
+        <label>Devices: </label>
+        <select (change)="wellBeing($event)">
+          <option value="0">--SELECT--</option>
+          <option *ngFor="let deviceNumber of deviceArrayFromSparql" value={{deviceNumber}}>
+            {{deviceNumber}}
+          </option>
+        </select>
+      </div>
 
-        <ul class="list-sidebar bg-defoult">
-          <input type="radio" name="1" value="1" (click)="getReport($event)"> 1 Day<br>
-          <input type="radio" name="1" value="7" (click)="getReport($event)"> 7 Days<br>
-          <input type="radio" name="1" value="30" (click)="getReport($event)"> 30 Days <br>
-          <input type="radio" name="1" value="356" (click)="getReport($event)"> 365 Days
-        </ul>
+      </div>
+      <!--end of devive list from sparql-->
+        <div *ngIf="showDiv">
+          <ul class="list-sidebar bg-defoult">
+            <input type="radio" name="1" value="1" (click)="getReport($event)"> 1 Day<br>
+            <input type="radio" name="1" value="7" (click)="getReport($event)"> 7 Days<br>
+            <input type="radio" name="1" value="30" (click)="getReport($event)"> 30 Days <br>
+            <input type="radio" name="1" value="356" (click)="getReport($event)"> 365 Days
+          </ul>
 
-        <div class="card-body p-1 m-0">
-					<canvas id="canvas"></canvas>
+          <!-- line break-->
+          <br>
+
+          <ul>
+            <li *ngFor="let welbeing of wellBeingReport" value={{welbeing}}>
+              {{welbeing.key}} : {{welbeing.value}}
+            </li>
+          </ul>
+
+
+
+
         </div>
+  </td>
+    <td> <div>
+      <p>This dropdown demonstrates the number of devices this client is subsribed for.</p>
+
+    <div>
+      <label>Devices: </label>
+      <select (change)="regDevices($event)">
+        <option value="0">--SELECT--</option>
+        <option *ngFor="let deviceNumber of devicesArray" value={{deviceNumber}}>
+          {{deviceNumber}}
+        </option>
+      </select>
+    </div>
+
+    </div> </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="card-body p-1 m-0">
+      <canvas id="canvas"></canvas>
+    </div>
+</td>
+    <td> <div class="row">
+
+
+      <div class="col-md-4">
+        <section>
+        <div class='circle-container'>
+        <a href='#' class='deg1'>  <h3> Unit:</h3>{{unit}}</a>
+        <a href='#' class='deg2'><h3>Value</h3>{{result}}</a>
+        <a href='#' class='deg3'><h3>Time Stamp</h3>{{observationTime}}</a>
+        <a href='#' class='deg4'><img src="./assets/img/api.png"  height="100%" width="100%"></a>
+        <a href='#' class='deg5'><h3>sensor ID:</h3>{{sensorId}}</a>
+        <a href='#' class='deg6'><h3>Location</h3>{{geosparql}}</a>
+        <!--<a href='#' class='deg7'>2458</a>-->
+        </div>
+        </section>
 
     </div>
- </aside>
-</div>
-  <div class="col-md-4">
-    <section>
-    <div class='circle-container'>
-    <a href='#' class='deg1'>  <h3> Unit:</h3>{{unit}}</a>
-    <a href='#' class='deg2'><h3>Value</h3>{{result}}</a>
-    <a href='#' class='deg3'><h3>Time Stamp</h3>{{observationTime}}</a>
-    <a href='#' class='deg4'><img src="./assets/img/api.png"  height="100%" width="100%"></a>
-    <a href='#' class='deg5'><h3>sensor ID:</h3>{{sensorId}}</a>
-    <a href='#' class='deg6'><h3>Location</h3>{{geosparql}}</a>
-    <!--<a href='#' class='deg7'>2458</a>-->
-    </div>
-    </section>
 
-</div>
+    </div></td>
+  </tr>
+</table>
 
-</div>
+
 
 
 

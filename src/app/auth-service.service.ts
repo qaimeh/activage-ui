@@ -1,5 +1,4 @@
 import { QuerymodelService } from './semantic-web/querymodel.service';
-import { environment } from './../environments/environment.prod';
 
 import { AppSettingsServiceService } from './shared/app-settings-service.service';
 import { Injectable } from '@angular/core';
@@ -64,6 +63,25 @@ export class AuthServiceService {
 }
 
 
+getDevicesInMsg(clientId: string) {
+
+  const headers = new HttpHeaders({
+  'accept': '*/*',
+  'Client-ID': clientId,
+  'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+  });
+
+  return this.http.post<any>(`${this.configSetting.aiotesUrl}${this.configSetting.observations}`, {}, {headers}).pipe(
+    map(obs => {
+      return obs;
+  }), catchError((error: HttpErrorResponse) => {
+    console.log('Handling error locally and rethrowing it...', error);
+    console.log('error is:' + throwError(error));
+    return throwError(error);
+})
+);
+}
+
 retrieveMsgs(clientId: string) {
 
   const headers = new HttpHeaders({
@@ -82,6 +100,7 @@ retrieveMsgs(clientId: string) {
 })
 );
 }
+
 
 
 /**
