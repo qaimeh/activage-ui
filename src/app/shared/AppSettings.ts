@@ -1,5 +1,5 @@
 export class AppSettings {
-  aiotesUrl: string ='https://activage.datascienceinstitute.ie:8081'
+  aiotesUrl: string ='https://vmurq09.deri.ie:8081'
   auth: string = '/security/auth';
   users: string = '/users';
   client: string = '/sil/mw2mw/clients';

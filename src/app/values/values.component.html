@@ -6,7 +6,7 @@
 
                 <!--start of devive list from sparql-->
       <div>
-        <p>This dropdown demonstrates the number of devices this client is subsribed for.</p>
+        <p>This dropdown demonstrates the number of devices this client is subsribed for in historic data.</p>
         <button type="button" class="btn btn-primary create-report">Report for client:  {{wellComeClientMsg}}</button>
       <div>
         <label>Devices: </label>
@@ -22,10 +22,10 @@
       <!--end of devive list from sparql-->
         <div *ngIf="showDiv">
           <ul class="list-sidebar bg-defoult">
-            <input type="radio" name="1" value="1" (click)="getReport($event)"> 1 Day<br>
-            <input type="radio" name="1" value="7" (click)="getReport($event)"> 7 Days<br>
-            <input type="radio" name="1" value="30" (click)="getReport($event)"> 30 Days <br>
-            <input type="radio" name="1" value="356" (click)="getReport($event)"> 365 Days
+            <input type="radio" name="1" value="1-1" (click)="getReport($event)"> 1 Day<br>
+            <input type="radio" name="1" value="1-7" (click)="getReport($event)"> 7 Days<br>
+            <input type="radio" name="1" value="1-30" (click)="getReport($event)"> 30 Days <br>
+            <input type="radio" name="1" value="1-365" (click)="getReport($event)"> 365 Days
           </ul>
 
           <!-- line break-->
@@ -69,12 +69,16 @@
       <div class="col-md-4">
         <section>
         <div class='circle-container'>
-        <a href='#' class='deg1'>  <h3> Unit:</h3>{{unit}}</a>
+
+        <a  *ngFor="let messageVlaues of resourceObservations; let i =index"  href='#' class='deg{{i+1}}'> <h6> {{messageVlaues.key}}:</h6><p style="color:rgb(31, 32, 46);">{{messageVlaues.value}}</p></a>
+
+       <!-- <a href='#' class='deg1'>  <h3> Unit:</h3>{{unit}}</a>
         <a href='#' class='deg2'><h3>Value</h3>{{result}}</a>
         <a href='#' class='deg3'><h3>Time Stamp</h3>{{observationTime}}</a>
-        <a href='#' class='deg4'><img src="./assets/img/api.png"  height="100%" width="100%"></a>
+        <a href='#' class='deg4'><h3>Location</h3>{{geosparql}}</a>
         <a href='#' class='deg5'><h3>sensor ID:</h3>{{sensorId}}</a>
-        <a href='#' class='deg6'><h3>Location</h3>{{geosparql}}</a>
+        <a href='#' class='deg6'><h3>Observed Property</h3>{{observeProp}}</a>
+        <a href='#' class='deg7'><h3>Observes</h3>{{observes}}</a> -->
         <!--<a href='#' class='deg7'>2458</a>-->
         </div>
         </section>
